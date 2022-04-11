@@ -1,6 +1,6 @@
 # jQuery Widget Factory Workshop
 
-## **Motivation:** Familiarize devs with the underlying technology behind Q4 Widgets
+## Motivation: Familiarize devs with the underlying technology behind Q4 Widgets
 
 Q4 widgets currently are built with jQuery's [Widget Factory](https://jqueryui.com/widget/). To better understand this technology, you will re-implement common features found in Q4 Widgets using a starter app as an example.
 
