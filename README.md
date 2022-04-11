@@ -2,9 +2,7 @@
 
 ## **Motivation:** Familiarize devs with the underlying technology behind Q4 Widgets
 
-Q4 widgets currently use are built with jQuery's [Widget Factory](https://jqueryui.com/widget/)
-
-Using a basic starter app, you will re-implement common features found in Q4 Widgets.
+Q4 widgets currently are built with jQuery's [Widget Factory](https://jqueryui.com/widget/). To better understand this technology, you will re-implement common features found in Q4 Widgets using a starter app as an example.
 
 To start, run ``yarn run start`` and open localhost:1234.
 
@@ -20,4 +18,4 @@ To start, run ``yarn run start`` and open localhost:1234.
 3. Create a `beforeRender` and `Complete` option
 4. Add a `limit` option to render only x items max
 
-Minimal styling is expect but is not the focus
+Minimal styling is expected but is not the focus
