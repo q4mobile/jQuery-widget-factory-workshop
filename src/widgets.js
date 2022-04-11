@@ -20,7 +20,7 @@ $(function () {
             // create a button
             this.logRandomText = $("<button>", {
                     text: "Log Text",
-                    "class": "logRandomText"
+                    "class": "logRandomText button is-primary",
                 })
                 .appendTo(this.element)
                 .button();
@@ -34,7 +34,7 @@ $(function () {
 
         // Called when created, and later when changing options
         _refresh: function () {
-            console.log('refreshed text', this.options.text);
+            console.log('Refreshed text:', this.options.text);
         },
 
         // a public method that can be triggered outside of the widget
@@ -57,15 +57,15 @@ $(function () {
         _setOptions: function () {
             // _super and _superApply handle keeping the right this-context
             this._superApply(arguments);
-            console.log('_setOptions arguments', arguments)
+            console.log('_setOptions - arguments:', arguments)
             this._refresh();
 
         },
 
         // _setOption is called for each individual option that is changing
         _setOption: function (key, value) {
-            console.log('_setOption key', key);
-            console.log('_setOption value', value);
+            console.log('_setOption - key:', key);
+            console.log('_setOption - value:', value);
             this._super(key, value);
         }
     });
