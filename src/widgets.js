@@ -1,11 +1,11 @@
 var jquery = require("jquery");
 window.$ = window.jQuery = jquery; // notice the definition of global variables here
 require("jquery-ui-dist/jquery-ui.js");
-require("mustache")
+var Mustache = require('mustache');
 
 $(function () {
     // the widget definition, where "q4" is the namespace,
-    // "colorize" the widget name
+    // "newWidget" the widget name
     $.widget("q4.newWidget", {
         // default options
         options: {
@@ -20,21 +20,16 @@ $(function () {
             // create a button
             this.logRandomText = $("<button>", {
                     text: "Log Text",
-                    "class": "logRandomText button is-primary",
+                    "class": "logRandomText button",
                 })
                 .appendTo(this.element)
                 .button();
 
-            // Bind click events on the changer button to the random method
+            // Bind click events on the "randomizeText" button to randomize the "text" option
             this._on(this.logRandomText, {
                 // run function "randomizeText" when button is clicked
                 click: "randomizeText"
             });
-        },
-
-        // Called when created, and later when changing options
-        _refresh: function () {
-            console.log('Refreshed text:', this.options.text);
         },
 
         // a public method that can be triggered outside of the widget
@@ -67,11 +62,17 @@ $(function () {
             console.log('_setOption - key:', key);
             console.log('_setOption - value:', value);
             this._super(key, value);
-        }
+        },
+
+        // Called when created, and later when changing options
+        _refresh: function () {
+            console.log('Refreshed text:', this.options.text);
+        },
     });
 
     // Initialize with default options
     $("#my-widget").newWidget({
         text: "Hello World"
     });
+    
 });
