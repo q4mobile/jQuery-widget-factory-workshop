@@ -18,15 +18,15 @@ $(function () {
             this._refresh();
 
             // create a button
-            this.logRandomText = $("<button>", {
+            this.logRandomTextButton = $("<button>", {
                     text: "Log Text",
                     "class": "logRandomText button",
                 })
                 .appendTo(this.element)
                 .button();
 
-            // Bind click events on the "randomizeText" button to randomize the "text" option
-            this._on(this.logRandomText, {
+            // Bind click event on the "randomizeText" button to randomize the "text" option
+            this._on(this.logRandomTextButton, {
                 // run function "randomizeText" when button is clicked
                 click: "randomizeText"
             });
