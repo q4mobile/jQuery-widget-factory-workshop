@@ -48,23 +48,23 @@ $(function () {
         },
 
         // _setOptions is called with a hash of all options that are changing
-        // always refresh when changing options
+        // Update widget with updated options with _refresh
         _setOptions: function () {
             // _super and _superApply handle keeping the right this-context
             this._superApply(arguments);
-            console.log('_setOptions - arguments:', arguments)
             this._refresh();
-
         },
 
         // _setOption is called for each individual option that is changing
         _setOption: function (key, value) {
-            console.log('_setOption - key:', key);
-            console.log('_setOption - value:', value);
+            if ( key === "text" ) {
+                value = value + " appendedText"
+            }
             this._super(key, value);
         },
 
-        // Called when created, and later when changing options
+        // Called in _create and _setOptions
+        // updates widget based on changes in options
         _refresh: function () {
             console.log('Refreshed text:', this.options.text);
         },
