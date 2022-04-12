@@ -22,3 +22,4 @@ To start, run `yarn run start` and open localhost:1234.
 4. Add a `limit` option to render only x items max
 
 Minimal styling is expected but is not the focus
+[Bulma](https://bulma.io/) is added with a CDN but can easily be removed.
