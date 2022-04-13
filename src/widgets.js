@@ -32,17 +32,17 @@ $(function () {
         _destroy: function () {ß
             this._trigger('onDestroy');
         },
-
-        _setOptions: function () {
-            this._superApply(arguments);
-            this._refresh();
-        },
-
+        
         _setOption: function (key, value) {
             if (key === "text") {
                 value = value + " appendedText"
             }
             this._super(key, value);
+        },
+
+        _setOptions: function () {
+            this._superApply(arguments);
+            this._refresh();
         },
 
     });
