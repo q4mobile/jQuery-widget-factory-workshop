@@ -14,7 +14,7 @@ To start, run `npm i` and then `yarn run start` and open localhost:1234.
     To see other APIs: [Q4 Web API Docs](http://documentation.q4websystems.com/home)
 
 
-2. Render the pulled data with [mustachejs](https://github.com/janl/mustache.js/)
+2. Render the pulled data with mustachejs. [Fiddle example](https://jsfiddle.net/bhaagmarway/a4e5yurb/40/)
 3. Create a `beforeRender` and `Complete` option
     
     Ensure `beforeRender` can pass updated data to the render method
