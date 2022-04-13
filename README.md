@@ -9,18 +9,16 @@ To start, run `npm i` and then `npm run start` and open localhost:1234.
 ## Tasks:
 1. Pull Data from a Q4 API
 
-    Sample Press Release Request: https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1
+    (Sample AJAX request for press releases)[https://jsfiddle.net/bhaagmarway/7901hov8/10/]
 
     To see other APIs: [Q4 Web API Docs](http://documentation.q4websystems.com/home)
 
 
-2. Render the pulled data with mustachejs. [Fiddle example](https://jsfiddle.net/bhaagmarway/a4e5yurb/40/)
-3. Create a `beforeRender` and `Complete` option
-    
-    Ensure `beforeRender` can pass updated data to the render method
-
-4. Add a `limit` option to render only x items max
-
-5. Stretch Goal - Create a filter (by year, tag, etc) and allow user to re-render items based on filter
+2. Render the "Headline" of each item pulled with [mustachejs](https://jsfiddle.net/bhaagmarway/a4e5yurb/40/)
+3. Create a `beforeRender` option (Use the _trigger method like in _destroy) 
+4. Prepend "HEADLINE: " to all headlines with your `beforeRender` method
+    Ex. "Cat Stuck on Bookshelf" to "HEADLINE: Cat Stuck on Bookshelf"
+5. Add a `limit` option to render only x items max
+6. **Stretch Goal** - Create a filter (by year, tag, etc) and allow user to re-render items based on filter
 
 Styling is not expected
