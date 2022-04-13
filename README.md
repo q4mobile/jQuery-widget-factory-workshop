@@ -4,7 +4,7 @@
 
 Q4 widgets are currently built with jQuery's [Widget Factory](https://jqueryui.com/widget/). To better understand this technology, you will re-implement common features found in Q4 Widgets using a starter app as an example.
 
-To start, run `npm i` and then `npm run start` and on your browser open [localhost:1234](localhost:1234).
+To start, run `npm i` and then `npm run start` and on your browser open [localhost:1234](http://localhost:1234).
 
 ## Tasks:
 1. Pull Data from a Q4 API
