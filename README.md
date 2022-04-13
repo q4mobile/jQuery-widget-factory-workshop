@@ -9,7 +9,7 @@ To start, run `npm i` and then `npm run start` and open localhost:1234.
 ## Tasks:
 1. Pull Data from a Q4 API
 
-    (Sample AJAX request for press releases)[https://jsfiddle.net/bhaagmarway/7901hov8/10/]
+    [Sample AJAX request for press releases](https://jsfiddle.net/bhaagmarway/7901hov8/10/)
 
     To see other APIs: [Q4 Web API Docs](http://documentation.q4websystems.com/home)
 
