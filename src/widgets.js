@@ -29,7 +29,7 @@ $(function () {
             console.log('Refreshed text:', this.options.text);
         },
 
-        _destroy: function () {
+        _destroy: function () {ß
             this._trigger('onDestroy');
         },
 
@@ -39,7 +39,7 @@ $(function () {
         },
 
         _setOption: function (key, value) {
-            if ( key === "text" ) {
+            if (key === "text") {
                 value = value + " appendedText"
             }
             this._super(key, value);

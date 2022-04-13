@@ -14,11 +14,11 @@ To start, run `npm i` and then `npm run start` and open localhost:1234.
     To see other APIs: [Q4 Web API Docs](http://documentation.q4websystems.com/home)
 
 
-2. Render the "Headline" of each item pulled with [mustachejs](https://jsfiddle.net/bhaagmarway/a4e5yurb/40/)
+2. Render the `Headline` of each item pulled with [mustachejs](https://jsfiddle.net/bhaagmarway/a4e5yurb/40/)
 3. Create a `beforeRender` option (Use the _trigger method like in _destroy) 
 4. Prepend "HEADLINE: " to all headlines with your `beforeRender` method
     Ex. "Cat Stuck on Bookshelf" to "HEADLINE: Cat Stuck on Bookshelf"
-5. Add a `limit` option to render only x items max
+5. Add a `limit` option where you can pass a function to limit items rendered to `x` items
 6. **Stretch Goal** - Create a filter (by year, tag, etc) and allow user to re-render items based on filter
 
 Styling is not expected
