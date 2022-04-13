@@ -29,7 +29,7 @@ $(function () {
             console.log('Refreshed text:', this.options.text);
         },
 
-        _destroy: function () {ß
+        _destroy: function () {
             this._trigger('onDestroy');
         },
         
