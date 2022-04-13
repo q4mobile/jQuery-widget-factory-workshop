@@ -21,4 +21,6 @@ To start, run `npm i` and then `yarn run start` and open localhost:1234.
 
 4. Add a `limit` option to render only x items max
 
+5. Stretch Goal - Create a filter (by year, tag, etc) and allow user to re-render items based on filter
+
 Styling is not expected
