@@ -15,11 +15,21 @@ $(function () {
         _create: function () {
             var _ = this;
 
+            _._requestData();
+            _._on($('#clickMeButton'), {
+                click: "_toggleFilterData"
+            });
+
+        },
+
+        _requestData: function(limit = -1) {
+            var _ = this;
+
             $('#clickMeButton').attr("disabled", true).text('Loading...');
 
             $.ajax({
                 type: "GET",
-                url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
+                url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=' + limit + '&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
                 dataType: 'json'
             }).done(function (json) {
                 _.option({
@@ -27,10 +37,6 @@ $(function () {
                     toRender: json.GetPressReleaseListResult
                 });
                 
-                _._on($('#clickMeButton'), {
-                    click: "_toggleFilterData"
-                });
-
                 $('#clickMeButton').attr("disabled", false).text('Toggle Limit');
             });
         },
@@ -40,11 +46,14 @@ $(function () {
                 limit = _.options.limit,
                 showLimitItems = !_.options.showLimitItems,
                 data = _.options.data;
+            
+            var newLimit = limit !== 0 && showLimitItems ? limit : -1
 
             _.option({
-                showLimitItems: showLimitItems,
-                toRender: limit !== 0 && showLimitItems ? data.slice(0, limit) : data
+                showLimitItems: showLimitItems
             });
+
+            _._requestData(newLimit);
         },
 
         _render: function () {
