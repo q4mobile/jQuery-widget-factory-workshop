@@ -14,7 +14,7 @@ $(function () {
 
         _create: function () {
             this._refresh();
-            this._on($('#randomizeTextButton'), {
+            this._on($('#clickMeButton'), {
                 click: "randomizeText"
             });
         },
@@ -26,7 +26,7 @@ $(function () {
         },
 
         _refresh: function () {
-            console.log('Refreshed text:', this.options.text);
+            $('#my-widget').html('<p>' + this.options.text + '</p>')
         },
 
         _destroy: function () {
