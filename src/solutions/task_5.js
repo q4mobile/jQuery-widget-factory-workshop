@@ -1,6 +1,6 @@
 var jquery = require("jquery");
 window.$ = window.jQuery = jquery;
-require("jquery-ui-dist/jquery-ui.js");
+require("jquery-ui-dist/jquery-ui.min.js");
 var Mustache = require('mustache');
 
 $(function () {
