@@ -7,6 +7,7 @@ $(function () {
     $.widget("q4.newWidget", {
         options: {
             toRender: "",
+            beforeRender: function() {},
         },
 
         _create: function () {
@@ -52,5 +53,8 @@ $(function () {
     });
 
     $("#my-widget").newWidget({
+        beforeRender: function() {
+            console.log('beforeRender has run!')
+        }
     });
 });
