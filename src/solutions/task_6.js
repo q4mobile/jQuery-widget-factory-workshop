@@ -6,7 +6,6 @@ var Mustache = require('mustache');
 $(function () {
     $.widget("q4.newWidget", {
         options: {
-            data: "",
             toRender: "",
             limit: 0,
             showLimitItems: false,
@@ -33,7 +32,6 @@ $(function () {
                 dataType: 'json'
             }).done(function (json) {
                 _.option({
-                    data: json.GetPressReleaseListResult,
                     toRender: json.GetPressReleaseListResult
                 });
                 
@@ -44,8 +42,7 @@ $(function () {
         _toggleFilterData: function () {
             var _ = this,
                 limit = _.options.limit,
-                showLimitItems = !_.options.showLimitItems,
-                data = _.options.data;
+                showLimitItems = !_.options.showLimitItems
             
             var newLimit = limit !== 0 && showLimitItems ? limit : -1
 
