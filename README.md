@@ -23,7 +23,7 @@ To start, run `npm i` and then `npm run start` and on your browser open [localho
 
     **HINT ->** You'll need three parameters for your _trigger method
 
-5. Add a `limit` option where you can pass a function to limit items rendered to `x` items
+5. Add a `limit` option where you can pass a number, "x", to limit items rendered to "x" items
 6. Allow user to toggle between showing the `limit` items and all items by pressing the `#clickMeButton` button
 
 Styling is not expected.
