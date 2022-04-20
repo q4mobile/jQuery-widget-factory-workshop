@@ -7,27 +7,33 @@ $(function () {
     $.widget("q4.newWidget", {
         options: {
             text: "I will be randomized",
+            template:'{{#.}}' + 
+                        '<p>{{Headline}}</p>' +
+                     '{{/.}}',
+            beforeRender: function () {
+            },                     
             onDestroy: function () {
                 console.log('The widget has been destroyed');
             }
         },
 
         _create: function () {
-            this._refresh();
-            this._on($('#clickMeButton'), {
-                click: "randomizeText"
-            });
-            $.ajax({
-                type: "GET",
-                url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
-                dataType: 'json'
-              }).done(function(json){
-                  console.log(json);
-                  this.option({
-                      data: json.GetPressReleaseListResult
-                  })
-                // $('body').html(JSON.stringify(json));
-              });
+            // this._on($('#clickMeButton'), {
+                //     click: "randomizeText"
+                // });
+                var t = this;
+                $.ajax({
+                    type: "GET",
+                    url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
+                    dataType: 'json'
+                }).done(function(json){
+                    console.log(json);
+                    t.option({
+                        data: json.GetPressReleaseListResult
+                    })
+                    // $('body').html(JSON.stringify(json));
+                });
+                this._refresh();
         },
 
         randomizeText: function () {
@@ -36,21 +42,10 @@ $(function () {
             });
         },
 
-        _template: function () {
-            var data = this.options.data;
-            var template = (
-                '{{#.}}' + 
-                    '<p>{{Headline}}</p>' +
-                '{{/.}}'
-            )
-
-            var render = Mustache.render(template, data);
-            $('#my-widget').html(render);
-
-        },
-
         _refresh: function () {
-            $('#my-widget').html('<p>' + this.options.text + '</p>')
+            console.log('refresh', this)
+            this._trigger('beforeRender', null, this.options.data);
+            $('#my-widget').html(Mustache.render(this.options.template, this.options.data));
         },
 
         _destroy: function () {
@@ -68,7 +63,6 @@ $(function () {
             this._superApply(arguments);
             this._refresh();
         },
-
     });
 
     // $("#my-widget").newWidget({
@@ -77,5 +71,5 @@ $(function () {
 
     // $("#my-widget").newWidget('randomizeText');
 
-    $('#my-widget').newWidget({});
+    $('#my-widget').newWidget();
 });
