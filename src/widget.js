@@ -7,6 +7,7 @@ $(function () {
   $.widget('q4.newWidget', {
     options: {
       newsData: '',
+      beforeRender: function () {},
       onDestroy: function () {
         console.log('The widget has been destroyed')
       },
@@ -28,10 +29,11 @@ $(function () {
     // render data
     _render: function () {
       const data = this.options.newsData
+      this._trigger('beforeRender')
       const tpl =
         '<ul>' +
         '{{#.}}' +
-        '<li><a href="#">HEADLINE: {{Headline}}</a></li>' +
+        '<li><a href="#">{{Headline}}</a></li>' +
         '{{/.}}' +
         '</ul>'
 
@@ -54,5 +56,9 @@ $(function () {
     },
   })
 
-  $('#my-widget').newWidget({})
+  $('#my-widget').newWidget({
+    beforeRender: function () {
+      console.log('before render is working')
+    },
+  })
 })
