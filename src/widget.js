@@ -5,16 +5,6 @@ var Mustache = require('mustache');
 
 
 $(function () {
-    async function fetchPressReleases() {
-        $.ajax({
-            type: "GET",
-            url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
-            dataType: 'json'
-          }).done(function(json){
-              console.log(json);
-            $('body').html(JSON.stringify(json));
-          });
-    }
 
     $.widget("q4.newWidget", {
         options: {
@@ -27,7 +17,8 @@ $(function () {
 
         _create: function () {
             let siteCode = this.option('siteCode')
-            this._fetchPressReleases(siteCode);
+            this._fetchPressReleases(siteCode).then(this._renderHeadlines)
+            // this._renderHeadlines(json)
             this._refresh();
             this._on($('#clickMeButton'), {
                 click: "randomizeText"
@@ -35,14 +26,28 @@ $(function () {
         },
 
         _fetchPressReleases: function (siteCode) {
-            $.ajax({
+           return $.ajax({
                 type: "GET",
                 url: `https://${siteCode}.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1`,
                 dataType: 'json'
             }).done(function(json){
-                console.log(json);
                 // json is the response data
             });
+        },
+
+        _renderHeadlines: function(json){
+     
+            var pressReleases=json.GetPressReleaseListResult
+            var headlineTemplate=(
+                '{{#.}}'+
+                '<p>{{Headline}}</p>'+
+                '{{/.}}'
+
+            )
+            var headlineOutput=Mustache.render(headlineTemplate,pressReleases)
+            $('body').html(headlineOutput)
+                   console.log(pressReleases)
+    
         },
 
         randomizeText: function () {
