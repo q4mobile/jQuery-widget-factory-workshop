@@ -11,6 +11,7 @@ $(function () {
       onDestroy: function () {
         console.log('The widget has been destroyed')
       },
+      limit: null,
     },
 
     // use ajax to call news endpoint and store data globally
@@ -41,12 +42,23 @@ $(function () {
       $('#my-widget').html(markup)
     },
 
+    _setLimit: function (limit) {
+      const data = this.options.newsData
+      const limitedData = data.slice(0, limit)
+      return limitedData
+    },
+
     _destroy: function () {},
 
     _setOption: function (key, value) {
       this._super(key, value)
       if (key === 'newsData') {
         this._render()
+      }
+
+      const limitValue = this.options.limit
+      if (limitValue !== null) {
+        this._setLimit(this.options.limit)
       }
     },
 
@@ -56,6 +68,7 @@ $(function () {
   })
 
   $('#my-widget').newWidget({
+    limit: 2,
     beforeRender: function (event, data) {
       $.each(data.data, function (index, item) {
         item.Headline = `HEADLINE: ${item.Headline}`
