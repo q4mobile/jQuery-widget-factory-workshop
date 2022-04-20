@@ -10,7 +10,7 @@ $(function () {
             template:'{{#.}}' + 
                         '<p>{{Headline}}</p>' +
                      '{{/.}}',
-            beforeRender: function () {
+            beforeRender: function (e, data) {
             },                     
             onDestroy: function () {
                 console.log('The widget has been destroyed');
@@ -27,10 +27,11 @@ $(function () {
                     url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
                     dataType: 'json'
                 }).done(function(json){
-                    console.log(json);
+                    // console.log(json);
                     t.option({
                         data: json.GetPressReleaseListResult
                     })
+                    t._trigger('beforeRender', null, t.options.data)
                     // $('body').html(JSON.stringify(json));
                 });
                 this._refresh();
@@ -43,8 +44,7 @@ $(function () {
         },
 
         _refresh: function () {
-            console.log('refresh', this)
-            this._trigger('beforeRender', null, this.options.data);
+            // console.log('refresh', this)
             $('#my-widget').html(Mustache.render(this.options.template, this.options.data));
         },
 
@@ -71,5 +71,12 @@ $(function () {
 
     // $("#my-widget").newWidget('randomizeText');
 
-    $('#my-widget').newWidget();
+    $('#my-widget').newWidget({
+        beforeRender: function(e, data){
+            // $.each(data, function(){
+            //     console.log(this);
+            //     // $(this).Headline.prepend('HEADLINE:');
+            // })
+        }
+    });
 });
