@@ -6,14 +6,13 @@ var Mustache = require("mustache");
 $(function () {
     $.widget("q4.newWidget", {
         options: {
-            limit:4,
-            limitState:false,
+            limit: 4,
+            limitState: false,
             text: "I will be randomized",
             containerId: "new-container",
             dataObj: { items: [] },
             onDestroy: function () {
-                console.log("The widget has been destroyed");
-            },
+             },
         },
         _create: function () {
             this._refresh();
@@ -23,7 +22,6 @@ $(function () {
             });
         },
         getData: function () {
-            console.log("data is here");
             var itemsObj = {};
             $.ajax({
                 type: "GET",
@@ -36,63 +34,48 @@ $(function () {
                 });
 
                 itemsObj = { items: headlineData };
-
                 this.beforeRender(itemsObj);
-
                 this.initialize(this.options.dataObj);
             });
         },
         beforeRender: function (itemsObj) {
             //we do our manipulation here
-
-            limitObj = this.options.limitState ? itemsObj.items.slice(0,this.options.limit) : itemsObj.items;
-
+            limitObj = this.options.limitState ? itemsObj.items.slice(0, this.options.limit) : itemsObj.items;
             itemsObj = limitObj.map(function (item) {
                 return { headline: `HEADLINE: ${item.headline}` };
             });
-
             this.options.dataObj.items = itemsObj;
         },
         initialize: function () {
-            console.log("initialize function");
             var template = `{{#items}}
                                     <p>{{headline}}</p>
                                 {{/items}}`;
 
             var rendered = Mustache.render(template, this.options.dataObj);
-
             document.getElementById(this.options.containerId).innerHTML = rendered;
-            // $('#my-widget').html(headlineData);
         },
         changeLimitState: function () {
-            console.log('change');
              this.options.limitState = !this.options.limitState;
-             this._refresh();
-        },
-
+            this._refresh();
+        }, 
         _refresh: function () {
             this.getData();
-        },
-
+        }, 
         _destroy: function () {
             this._trigger("onDestroy");
-        },
-
+        }, 
         _setOption: function (key, value) {
             if (key === "text") {
                 value = value + " appendedText";
             }
             this._super(key, value);
         },
-
         _setOptions: function () {
             this._superApply(arguments);
             this._refresh();
         },
     });
-
     $("#my-widget").newWidget({
         text: "Hello World",
     });
- 
 });
