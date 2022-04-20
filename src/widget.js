@@ -11,6 +11,7 @@ $(function () {
         console.log("The widget has been destroyed");
       },
       beforeRender: function (event, data) {
+          console.log('data', data);
         this._trigger();
       },
     },
@@ -32,7 +33,16 @@ $(function () {
       var _ = this;
       var toRender = _.options.toRender;
       var template = "{{#.}}" + "<h2>{{Headline}}</h2>" + "{{/.}}";
-      console.log(toRender);
+
+      console.log(toRender)
+      var limit = toRender.length;
+      limit =2
+        if(limit>0&& limit<=toRender.length)
+
+       for(var i =0;i< limit;i++){
+           var temp = toRender[i].Headline;
+           toRender[i].Headline = "Headline: " + temp;
+       }
 
       var output = Mustache.render(template, toRender);
       $("#my-widget").html(output);
