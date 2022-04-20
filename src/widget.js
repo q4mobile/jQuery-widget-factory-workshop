@@ -1,55 +1,58 @@
-var jquery = require("jquery");
-window.$ = window.jQuery = jquery;
-require("jquery-ui-dist/jquery-ui.min.js");
-var Mustache = require('mustache');
+var jquery = require('jquery')
+window.$ = window.jQuery = jquery
+require('jquery-ui-dist/jquery-ui.min.js')
+var Mustache = require('mustache')
 
 $(function () {
-    $.widget("q4.newWidget", {
-        options: {
-            text: "I will be randomized",
-            onDestroy: function () {
-                console.log('The widget has been destroyed');
-            }
-        },
+  $.widget('q4.newWidget', {
+    options: {
+      newsData: '',
+      onDestroy: function () {
+        console.log('The widget has been destroyed')
+      },
+    },
 
-        _create: function () {
-            this._refresh();
-            this._on($('#clickMeButton'), {
-                click: "randomizeText"
-            });
-        },
+    // use ajax to call news endpoint and store data globally
+    _create: function () {
+      $.ajax({
+        type: 'GET',
+        url: 'https://deltaclonesandbox.q4web.com/feed/PressRelease.svc/GetPressReleaseList?LanguageId=1&bodyType=0&pressReleaseDateFilter=3&categoryId=1cb807d2-208f-4bc3-9133-6a9ad45ac3b0&pageSize=-1&pageNumber=0&tagList=&includeTags=true&excludeSelection=1',
+        dataType: 'json',
+      }).done((result) => {
+        this.option({
+          newsData: result.GetPressReleaseListResult,
+        })
+      })
+    },
 
-        randomizeText: function () {
-            this.option({
-                text: (Math.random() + 1).toString(36).substring(7)
-            });
-        },
+    // render data
+    _render: function () {
+      const data = this.options.newsData
+      const tpl =
+        '<ul>' +
+        '{{#.}}' +
+        '<li><a href="#">HEADLINE: {{Headline}}</a></li>' +
+        '{{/.}}' +
+        '</ul>'
 
-        _refresh: function () {
-            $('#my-widget').html('<p>' + this.options.text + '</p>')
-        },
+      const markup = Mustache.render(tpl, data)
+      console.log('result in render', markup)
+      $('#my-widget').html(markup)
+    },
 
-        _destroy: function () {
-            this._trigger('onDestroy');
-        },
-        
-        _setOption: function (key, value) {
-            if (key === "text") {
-                value = value + " appendedText"
-            }
-            this._super(key, value);
-        },
+    _destroy: function () {},
 
-        _setOptions: function () {
-            this._superApply(arguments);
-            this._refresh();
-        },
+    _setOption: function (key, value) {
+      this._super(key, value)
+      if (key === 'newsData') {
+        this._render()
+      }
+    },
 
-    });
+    _setOptions: function () {
+      this._superApply(arguments)
+    },
+  })
 
-    $("#my-widget").newWidget({
-        text: "Hello World"
-    });
-
-    $("#my-widget").newWidget('randomizeText');
-});
+  $('#my-widget').newWidget({})
+})
