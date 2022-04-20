@@ -23,6 +23,9 @@ $(function () {
                 dataType: 'json'
               }).done(function(json){
                   console.log(json);
+                  this.option({
+                      data: json.GetPressReleaseListResult
+                  })
                 // $('body').html(JSON.stringify(json));
               });
         },
@@ -31,6 +34,19 @@ $(function () {
             this.option({
                 text: (Math.random() + 1).toString(36).substring(7)
             });
+        },
+
+        _template: function () {
+            var data = this.options.data;
+            var template = (
+                '{{#.}}' + 
+                    '<p>{{Headline}}</p>' +
+                '{{/.}}'
+            )
+
+            var render = Mustache.render(template, data);
+            $('#my-widget').html(render);
+
         },
 
         _refresh: function () {
@@ -55,9 +71,11 @@ $(function () {
 
     });
 
-    $("#my-widget").newWidget({
-        text: "Hello World"
-    });
+    // $("#my-widget").newWidget({
+    //     text: "Hello World"
+    // });
 
-    $("#my-widget").newWidget('randomizeText');
+    // $("#my-widget").newWidget('randomizeText');
+
+    $('#my-widget').newWidget({});
 });
