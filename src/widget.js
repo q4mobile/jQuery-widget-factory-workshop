@@ -10,6 +10,7 @@ $(function () {
         options: {
             text: "I will be randomized",
             siteCode: 'deltaclonesandbox',
+            limit: 2,
             itemData:[],
             onDestroy: function () {
                 console.log('The widget has been destroyed');
@@ -47,6 +48,11 @@ $(function () {
         _renderHeadlines: function(){
             
             var pressReleases=this.options.itemData;
+            var limit = this.options.limit;
+            if (limit != 0){
+                pressReleases.length = this.options.limit;
+            }
+
             this.options.beforeRender(pressReleases);
             var headlineTemplate=(
                 '{{#.}}'+
@@ -54,16 +60,21 @@ $(function () {
                 '{{/.}}'
 
             )
-            var headlineOutput=Mustache.render(headlineTemplate,pressReleases)
-            $('body').html(headlineOutput)
-                   console.log(pressReleases)
+            console.log({yas:this})
+            var headlineOutput=Mustache.render(headlineTemplate,pressReleases);
+            $('body').html(headlineOutput);
+            console.log(pressReleases);
     
         },
 
         randomizeText: function () {
             this.option({
                 text: (Math.random() + 1).toString(36).substring(7)
-            });
+            })
+        },
+
+        toggleLimit: function () {
+
         },
         
         _refresh: function () {
@@ -95,6 +106,7 @@ $(function () {
     $("#my-widget").newWidget({
         text: "Hello World",
         siteCode: 'studioclassic2018na1',
+        limit: 2,
         beforeRender:function(data){
             console.log(data);
             $.each(data,function(i,v){
