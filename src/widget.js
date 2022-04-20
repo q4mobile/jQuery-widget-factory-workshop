@@ -10,14 +10,15 @@ $(function () {
             template:'{{#.}}' + 
                         '<p>{{Headline}}</p>' +
                      '{{/.}}',
-            beforeRender: function (e, data) {
-            },                     
+            beforeRender: function (e, data) {},     
+            limit: 10,            
             onDestroy: function () {
                 console.log('The widget has been destroyed');
             }
         },
 
         _create: function () {
+            console.log('check');
             // this._on($('#clickMeButton'), {
                 //     click: "randomizeText"
                 // });
@@ -45,9 +46,10 @@ $(function () {
 
         _refresh: function () {
             console.log('refresh', this.options.data);
-            this._trigger('beforeRender', null, {data: this.options.data})
+            var data = this.options.data.slice(0, this.options.limit)
+            this._trigger('beforeRender', null, {data: data});
 
-            $('#my-widget').html(Mustache.render(this.options.template, this.options.data));
+            $('#my-widget').html(Mustache.render(this.options.template, data));
         },
 
         _destroy: function () {
