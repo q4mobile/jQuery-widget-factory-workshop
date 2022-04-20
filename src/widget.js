@@ -62,7 +62,8 @@ $(function () {
             )
             console.log({yas:this})
             var headlineOutput=Mustache.render(headlineTemplate,pressReleases);
-            $('body').html(headlineOutput);
+            //$('body').html(headlineOutput);
+            $(this.element).html(headlineOutput);
             console.log(pressReleases);
     
         },
@@ -78,7 +79,8 @@ $(function () {
         },
         
         _refresh: function () {
-            $('#my-widget').html('<p>' + this.options.text + '</p>')
+            //$('#my-widget').html('<p>' + this.options.text + '</p>')
+            // this._renderHeadlines();
         },
 
         _destroy: function () {
