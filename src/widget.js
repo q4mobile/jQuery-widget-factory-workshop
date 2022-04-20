@@ -7,7 +7,7 @@ $(function () {
   $.widget('q4.newWidget', {
     options: {
       newsData: '',
-      beforeRender: function () {},
+      beforeRender: function (event, data) {},
       onDestroy: function () {
         console.log('The widget has been destroyed')
       },
@@ -29,7 +29,7 @@ $(function () {
     // render data
     _render: function () {
       const data = this.options.newsData
-      this._trigger('beforeRender')
+      this._trigger('beforeRender', null, { data: data })
       const tpl =
         '<ul>' +
         '{{#.}}' +
@@ -38,7 +38,6 @@ $(function () {
         '</ul>'
 
       const markup = Mustache.render(tpl, data)
-      console.log('result in render', markup)
       $('#my-widget').html(markup)
     },
 
@@ -57,8 +56,10 @@ $(function () {
   })
 
   $('#my-widget').newWidget({
-    beforeRender: function () {
-      console.log('before render is working')
+    beforeRender: function (event, data) {
+      $.each(data.data, function (index, item) {
+        item.Headline = `HEADLINE: ${item.Headline}`
+      })
     },
   })
 })
